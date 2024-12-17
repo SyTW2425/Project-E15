@@ -1,7 +1,7 @@
 <template>
     <div class="timer-component">
         <h1 class="timer-title">Timer</h1>
-        <div class="timer-visual">
+        <div class="timer-visual" :style="{ color: timerColor }">
             <p class="timer-display">{{ timeDisplay }}</p>
         </div>
         <div class="button-collections">
@@ -49,6 +49,13 @@ export default defineComponent({
                 console.error('Error al obtener las preferencias del usuario:', error);
             }
         });
+
+        const timerColor = computed(() => {
+            const remainingTime = timerStore.currentTime; 
+            const halfWorkDuration = workDuration.value * 30; 
+            return remainingTime <= halfWorkDuration ? 'rgb(185, 58, 58)' : 'rgb(18, 102, 102)';
+        });
+
         const startTimer = (workDuration: number, breakDuration: number) => {
             timerStore.startTimer(workDuration, breakDuration)
         }
@@ -67,6 +74,7 @@ export default defineComponent({
             breakDuration,
             pauseTimer,
             stopTimer,
+            timerColor,
             methodName
         }
     } 
@@ -81,7 +89,7 @@ body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    display:grid;
+    display: grid;
     place-items: center;
     overflow: hidden;
 }
@@ -91,19 +99,22 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
-.timer-component h1{
-    margin-bottom: 50px;
-    font-size: 4rem;
+.timer-component h1 {
+    margin-bottom: 20px;
+    font-size: 3rem;
 }
 
 .timer-visual {
     display: flex;  
     align-items: center;
     justify-content: center;
-    width: 350px;
-    height: 350px;
+    width: 80vw;
+    height: 80vw;
+    max-width: 350px;
+    max-height: 350px;
     border: 6px solid rgb(18, 102, 102);
     color: rgb(18, 102, 102);
     border-radius: 50%;
@@ -117,13 +128,16 @@ body {
 }
 
 .button-collections {
-    margin-top: 50px;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
 button {
-    width: 100px;
+    width: 80px;
     height: 40px; 
-    margin: 0 20px;
-    padding: 20px 60px;
+    margin: 10px;
     font-size: 0.9rem;
     background-color: #4c7761; 
     color: white;
@@ -131,15 +145,27 @@ button {
     cursor: pointer;
     transition: background-color 0.6s;
     border-radius: 50px;
-    margin-right: 10px;
 }
 
-button:hover  {
+button:hover {
     background-color: #344E41;
     cursor: not-allowed;
     border-color: #83af82;
     box-shadow: 0px 0px 4px #79ac92;
 }
 
+@media (max-width: 600px) {
+    .timer-component h1 {
+        font-size: 2.5rem;
+    }
+
+    .timer-visual {
+        font-size: 3rem;
+    }
+
+    button {
+        width: 70px;
+    }
+}
 </style>
 

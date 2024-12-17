@@ -2,7 +2,12 @@
   <header class="menu-bar">
     <div class="menu-container">
       <nav class="menu">
-        <ul>
+        <div class="menu-toggle" @click="toggleMenu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul :class="{ 'active': isMenuActive }">
           <li><img src="./../assets/SM_logo.png" alt="Method Study Logo" class="logo" /></li>
           <li><h1 class="logo-text">Method Study</h1></li>
           <li><router-link to="/">Inicio</router-link></li>
@@ -10,7 +15,6 @@
           <li><a href="#contacto">Contacto</a></li>
           <div class="auth-buttons">
             <ul>
-              <!-- Si el usuario está autenticado -->
               <li v-if="auth.isAuthenticated">
                 <h3>Bienvenido, {{ auth.name }}</h3>
               </li>
@@ -20,7 +24,6 @@
               <li v-if="auth.isAuthenticated">
                 <button class='logout' @click="handleLogout">Cerrar Sesión</button>
               </li>
-              <!-- Si el usuario no está autenticado -->
               <li v-else>
                 <button @click="handleRegister">Registrarse</button>
               </li>
@@ -32,34 +35,41 @@
   </header>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useAuthStore } from '@/stores/authstore' // Tu store de autenticación
+import { defineComponent, ref } from 'vue'
+import { useAuthStore } from '@/stores/authstore'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'NavbarMenu',
   setup() {
-    const auth = useAuthStore() // Accede al store de autenticación
-    const router = useRouter() // Router para navegar entre vistas
+    const auth = useAuthStore()
+    const router = useRouter()
+    const isMenuActive = ref(false)
+
+    const toggleMenu = () => {
+      isMenuActive.value = !isMenuActive.value
+    }
 
     const handleLogin = () => {
-      router.push('/login') // Redirige a la página de inicio de sesión
+      router.push('/login')
     }
 
     const handleRegister = () => {
-      router.push('/register') // Redirige a la página de registro
+      router.push('/register')
     }
 
     const handleLogout = async () => {
-      await auth.logout() // Cierra sesión a través del store
-      router.push('/') // Redirige al inicio después de cerrar sesión
+      await auth.logout()
+      router.push('/')
     }
 
     return {
-      auth, // Acceso al estado reactivo del store
+      auth,
       handleLogin,
       handleRegister,
       handleLogout,
+      isMenuActive,
+      toggleMenu,
     }
   },
 })
@@ -79,6 +89,7 @@ export default defineComponent({
 
 .menu {
   display: flex;
+  justify-content: space-between;
 }
 
 .menu-container {
@@ -88,6 +99,19 @@ export default defineComponent({
   align-items: center;
 }
 
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background-color: white;
+  margin: 3px 0;
+}
+
 .menu ul {
   list-style: none;
   margin: 0;
@@ -95,14 +119,18 @@ export default defineComponent({
   display: flex;
 }
 
+.menu ul.active {
+  display: block;
+}
+
 .menu ul li img.logo {
-  margin-right: 10px; /* Ajusta el espacio entre el logo y el texto */
+  margin-right: 10px;
 }
 
 .logo {
-  height: auto; /* Mantén la proporción */
-  width: 50px; /* Ajusta el tamaño según lo necesario */
-  object-fit: contain; /* Evita que el logo se distorsione */
+  height: auto;
+  width: 50px;
+  object-fit: contain;
   margin-top: 10;
 }
 
@@ -110,9 +138,9 @@ export default defineComponent({
   margin-top: -6px;
 }
 .menu ul li {
-  margin-left: 30px; /* Reduce el espacio entre los elementos si es necesario */
-  margin-top: 0; /* Elimina cualquier desplazamiento vertical */
-  height: 60px; /* Asegúrate de que tengan la misma altura que el navbar */
+  margin-left: 30px;
+  margin-top: 0;
+  height: 60px;
   display: flex;
   align-items: center;
 }
@@ -120,7 +148,7 @@ export default defineComponent({
   text-decoration: none;
   color: white;
   font-weight: bold;
-  line-height: 60px; /* Ajusta la altura del texto al mismo que el navbar */
+  line-height: 60px;
 }
 
 .menu ul li a:hover {
@@ -151,5 +179,29 @@ export default defineComponent({
 .auth-buttons button:hover {
   background-color: #23352c;
   margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .menu ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #344e41;
+    width: 100%;
+  }
+
+  .menu ul.active {
+    display: flex;
+  }
+
+  .auth-buttons {
+    margin-left: 0;
+  }
 }
 </style>
