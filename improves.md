@@ -46,3 +46,6 @@
             return 'Error desconocido';
         }
     ````
+
+- aplicaicon responsiva
+- Pasar todo a Inglés
