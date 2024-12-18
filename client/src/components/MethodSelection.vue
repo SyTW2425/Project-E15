@@ -21,7 +21,6 @@
 </template>
 
 <script lang="ts">
-import { Types } from 'mongoose'
 import { useRouter } from 'vue-router'
 import { defineComponent, onMounted, computed } from 'vue'  
 import { useAuthStore } from '@/stores/authstore'
@@ -51,9 +50,8 @@ export default defineComponent({
         if (!method._id) {
           throw new Error('No se ha encontrado el ID del método')
         }
-        const userID = new Types.ObjectId(userIDString)
-        sessionStorage.setItem('userID', userID.toString());
-        sessionStorage.setItem('methodID', method._id.toString());
+        sessionStorage.setItem('methodId', method._id.toString());
+        sessionStorage.setItem('methodName', method.name)
         router.push('/subject')
         
       } catch (error) {

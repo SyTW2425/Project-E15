@@ -24,13 +24,19 @@ export const useAuthStore = defineStore('auth', {
                 throw new Error("Email y contraseña son requeridos");
             }
             try {
-              // Enviar solicitud al backend
                 const response = await axios.post('http://localhost:5300/user/login', { email, password });
                 this.token = response.data.token;
                 this.email = response.data.email; 
                 this.name = response.data.name;
+
                 const userId = response.data.userID;
-                sessionStorage.setItem('loggedUserId', userId);
+                const userEmail = response.data.email;
+                const userName = response.data.name;
+
+                sessionStorage.setItem('userId', userId);
+                sessionStorage.setItem('userEmail', userEmail);
+                sessionStorage.setItem('userName', userName);
+
                 if (this.token) {
                     this.isAuthenticated = true;
                     localStorage.setItem('token', this.token);
@@ -72,7 +78,7 @@ export const useAuthStore = defineStore('auth', {
         isLoggedIn: (state) => state.isAuthenticated,
 
         loggedUserId: (): string | null => {
-            return sessionStorage.getItem('loggedUserId');
+            return sessionStorage.getItem('userId');
         }
     },
 });

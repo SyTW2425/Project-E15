@@ -17,6 +17,7 @@ import { useAuthStore } from '@/stores/authstore'
 import { useTimerStore } from '@/stores/timer_store'
 import { defineComponent, onMounted, computed, ref } from 'vue'
 import { usePreferencesStore } from '@/stores/userPreferences_store'
+import router from '@/router'
 
 
 import { Types } from 'mongoose'
@@ -65,6 +66,7 @@ export default defineComponent({
 
         const stopTimer = () => {
             timerStore.stopTimer()
+            router.push('/history')
         }
 
         return {

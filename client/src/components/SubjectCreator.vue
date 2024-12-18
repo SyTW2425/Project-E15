@@ -35,14 +35,14 @@ export default defineComponent({
         }
 
         const savePreferences = async (subjectId: string ) => {
-            const userID = sessionStorage.getItem('userID');
-            const methodId = sessionStorage.getItem('methodID');
+            const userID = sessionStorage.getItem('userId');
+            const methodId = sessionStorage.getItem('methodId');
             
-
             if(!userID || !methodId) {
                 throw new Error('User ID or method ID not found');
             }
             await preferencesStore.addUserPreferences(userID, methodId, subjectId)
+            console.log('controlpoint')
             router.push('/timer')
 
         }
