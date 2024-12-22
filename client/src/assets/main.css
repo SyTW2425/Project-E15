@@ -1,12 +1,14 @@
 @import './base.css';
 
  #app {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 1rem;
+  max-width: none;
+  margin: 0 0 0 0;
+  padding: 0 2rem ;
   font-weight: normal;
-  
-
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; /* Alinea todos los elementos hijos al centro horizontalmente */
+  justify-content: center;
 }
 
 a,
@@ -18,17 +20,11 @@ a,
 }
 
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   body {
     display: flex;
     place-items: center;
     background-color: #344E41;
   }
-
-  #app {
-    display: flex; 
-    flex-direction: column; 
-    padding: 0 2rem;
-  }
-} 
+}  */
 
