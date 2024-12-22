@@ -42,23 +42,24 @@ router.get("/:userId", async (req: Request, res: Response) => {
 });
 
 router.post("/", async (req: Request, res: Response ) => {
-  try {
+    console.log('server history post', req.body)
+    try {
     const { userId, methodName, subjectName, totalStudyTime } =
-      req.body;
+        req.body;
 
     const newSession = new History({
-      userId,
-      methodName,
-      subjectName,
-      totalStudyTime
+        userId,
+        methodName,
+        subjectName,
+        totalStudyTime
     });
 
     const savedSession = await newSession.save();
     res.status(201).json(savedSession);
     console.log(savedSession)
-  } catch (error) {
+    } catch (error) {
     res.status(500).json({ message: "Error al guardar la sesión", error: error instanceof Error ? error.message : 'Error desconocido' });
-  }
+    }
 });
 
 // Eliminar todo el historial
