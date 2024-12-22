@@ -5,6 +5,7 @@ import UserList from '@/components/UserList.vue'
 import RegisterUser from '@/views/RegisterView.vue'
 import MethodSelectView from '@/views/MethodSelectView.vue'
 import SubjectCreatorView from '@/views/SubjectCreatorView.vue'
+import HistoryView from '@/views/HistoryView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -49,6 +50,11 @@ const router = createRouter({
       path: '/subject',
       name: 'SubjectCreator',
       component: SubjectCreatorView
+    },
+    {
+      path: '/history',
+      name: 'History',
+      component: HistoryView
     }
   ],
 })

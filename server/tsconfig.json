@@ -9,7 +9,7 @@
   },
   "include": [
     "**/*.ts"
-  ],
+, "../client/src/models/historyModel.ts"  ],
   "exclude": [
     "node_modules"
   ]
