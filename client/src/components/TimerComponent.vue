@@ -84,7 +84,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 body {
     background-color: #151B23;
@@ -103,6 +102,7 @@ body {
     justify-content: center;
     padding: 20px;
 }
+
 
 .timer-component h1 {
     margin-bottom: 20px;
@@ -125,11 +125,12 @@ body {
 }
 
 .timer-title {
-    font-family: 'Lobster', cursive;
+    font-family:Verdana, Geneva, Tahoma, sans-serif ;
     font-size: 2rem;
 }
 
 .button-collections {
+
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
