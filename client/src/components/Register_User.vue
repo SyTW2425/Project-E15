@@ -1,5 +1,4 @@
 <template>
-  <main class="main-container">
     <div class="container mt-5">
       <form @submit.prevent="registerUser" class="card p-4 shadow" style="max-width: 100%; width: 500px;">
         <h2 class="text-center mb-4">Sign Up</h2>
@@ -67,7 +66,6 @@
         </button>
       </form>
     </div>
-  </main>
 </template>
 
 <script lang="ts">
@@ -170,8 +168,6 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
   background-color: #151B23;
   border-radius: 8px;
   min-height: 100vh;
@@ -189,8 +185,6 @@ h2 {
 form {
   width: 100%; 
   max-width: 400px;
-  margin: 3rem auto; 
-  padding: 2rem 1.5rem; 
   border: 1px solid #ddd;
   border-radius: 8px; 
   background-color: #fff;

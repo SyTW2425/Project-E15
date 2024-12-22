@@ -67,8 +67,10 @@ export default defineComponent({
   border-radius: 20px;
   border-color: #151B23;
   background-color: #1f2731;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
+
+
 
 h2 {
   font-size: 1.9rem;
@@ -78,11 +80,13 @@ h2 {
   color: #588157;
 }
 
+
+
 form {
   width: 100%; 
   max-width: 400px;
   margin: 3rem auto; 
-  padding: 2rem 1.5rem; 
+  /* padding: 2rem 1.5rem;  */
   border: 1px solid #ddd;
   border-radius: 8px; 
   background-color: #353e49;

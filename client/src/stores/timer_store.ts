@@ -6,12 +6,24 @@ export const useTimerStore = defineStore('Timer', () => {
     const isBreak = ref<boolean>(false);
     const isRunning = ref<boolean>(false);
     const intervalId = ref<number | null>(null);
+    const totalStudyTime = ref<number>(0);
 
     const timeDisplay = computed(() => {
         const minutes = Math.floor(currentTime.value / 60);
         const seconds = currentTime.value % 60;
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     });
+
+    const studyTimeDisplay = computed(() => {
+        const hours = Math.floor(totalStudyTime.value / 3600);
+        const minutes = Math.floor((totalStudyTime.value % 3600) / 60);
+        const seconds = totalStudyTime.value % 60;
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    });
+
+    function getterTotalStudyTime() {
+        return totalStudyTime.value
+    }
 
     function startTimer(workDuration: number, breakDuration: number) {
         if (isRunning.value) return;
@@ -26,6 +38,7 @@ export const useTimerStore = defineStore('Timer', () => {
         intervalId.value = window.setInterval(() => {
             if (currentTime.value > 0) {
                 currentTime.value--;
+                totalStudyTime.value++;
             } else {
                 if (!isBreak.value) {
                     isBreak.value = true;
@@ -45,6 +58,7 @@ export const useTimerStore = defineStore('Timer', () => {
         isRunning.value = false;
         currentTime.value = 0;
         isBreak.value = false;
+        totalStudyTime.value = 0;
     }
 
     function pauseTimer() {
@@ -60,6 +74,7 @@ export const useTimerStore = defineStore('Timer', () => {
         currentTime.value = 0;
         isBreak.value = false;
         isRunning.value = false;
+        totalStudyTime.value = 0;
     }
     
 
@@ -71,6 +86,9 @@ export const useTimerStore = defineStore('Timer', () => {
         startTimer,
         stopTimer,
         pauseTimer,
-        resetTimer
+        resetTimer,
+        studyTimeDisplay,
+        totalStudyTime,
+        getterTotalStudyTime
     };
 })

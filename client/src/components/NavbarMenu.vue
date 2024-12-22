@@ -95,8 +95,7 @@ export default defineComponent({
 .menu-container {
   display: flex;
   height: 60px;
-  justify-content: space-between;
-  align-items: center;
+  width: auto;
 }
 
 .menu-toggle {
@@ -188,7 +187,7 @@ export default defineComponent({
 
   .menu ul {
     display: none;
-    flex-direction: column;
+    /* flex-direction: column; */
     position: absolute;
     top: 60px;
     left: 0;
