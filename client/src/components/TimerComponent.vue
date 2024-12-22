@@ -4,10 +4,14 @@
         <div class="timer-visual" :style="{ color: timerColor }">
             <p class="timer-display">{{ timeDisplay }}</p>
         </div>
+        <div class="study-time">
+            <p>Total Study Time: {{ studyTimeDisplay }}</p>
+            <p>Total Study Time: {{ totalStudyTime }}</p>
+        </div>
         <div class="button-collections">
             <button class="timer-button-start" @click="startTimer(workDuration, breakDuration)">START</button>
             <button class="timer-button-pause" @click="pauseTimer">PAUSE</button>
-            <button class="timer-button-stop" @click="stopTimer">RESTART</button>
+            <button class="timer-button-stop" @click="stopTimer">FINISH</button>
         </div>
     </div>
 </template>
@@ -17,6 +21,7 @@ import { useAuthStore } from '@/stores/authstore'
 import { useTimerStore } from '@/stores/timer_store'
 import { defineComponent, onMounted, computed, ref } from 'vue'
 import { usePreferencesStore } from '@/stores/userPreferences_store'
+import { useHistoryStore } from '@/stores/historyStore'
 import router from '@/router'
 
 
@@ -28,14 +33,19 @@ export default defineComponent({
         const timerStore = useTimerStore();
         const userIDString = authStore.loggedUserId
         const preferencesStore = usePreferencesStore();
+        const historyStore = useHistoryStore();
         if (!userIDString) {
             throw new Error('No se ha encontrado el ID del usuario')
         }
         const userID = new Types.ObjectId(userIDString)
         const timeDisplay = computed(() => timerStore.timeDisplay)
+        const studyTimeDisplay = computed(() => timerStore.studyTimeDisplay);
+        const totalStudyTime = computed(() => timerStore.totalStudyTime);
         const workDuration = ref(0);
         const breakDuration = ref(0);
         const methodName = ref('');
+        const breakFlag = computed(() => timerStore.isBreak)
+
         onMounted(async () => {
             try {
                 const preferences = await preferencesStore.getUserPreferences(userID);
@@ -66,6 +76,13 @@ export default defineComponent({
 
         const stopTimer = () => {
             timerStore.stopTimer()
+            //debug session
+            // console.log('userID',sessionStorage.getItem('userId'))
+            // console.log('methodName',sessionStorage.getItem('methodName')|| '')
+            // console.log('subjectName',sessionStorage.getItem('subjectName') || '')
+            // console.log('totalStudyTime',totalStudyTime.value)
+            //debug session
+            historyStore.postHistory(sessionStorage.getItem('userId') || '', sessionStorage.getItem('methodName')|| '', sessionStorage.getItem('subjectName') || '', timerStore.totalStudyTime)
             router.push('/history')
         }
 
@@ -77,7 +94,10 @@ export default defineComponent({
             pauseTimer,
             stopTimer,
             timerColor,
-            methodName
+            methodName,
+            breakFlag,
+            totalStudyTime,
+            studyTimeDisplay
         }
     } 
 })
@@ -127,6 +147,12 @@ body {
 .timer-title {
     font-family:Verdana, Geneva, Tahoma, sans-serif ;
     font-size: 2rem;
+}
+
+.study-time {
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: #6fcf97;
 }
 
 .button-collections {

@@ -2,7 +2,6 @@
 import NavbarMenu from "@/components/NavbarMenu.vue"
 import { ref, onMounted } from 'vue'; 
 const show = ref(false); 
-// Inicialmente está oculto 
 onMounted(() => 
 { 
   show.value = true; 
@@ -14,27 +13,32 @@ onMounted(() =>
   <NavbarMenu/>
 </header>
   <main>
-
-    <div id="Mostrar tituo"></div>
     <transition name="slide"> 
       <div v-if="show" class="container"> 
         <h1>Bienvenido</h1> 
-        <p>Esta es tu página ideal para estudiar</p> 
+        <p>Esta es tu página ideal para estudiar.</p> 
       </div> 
     </transition>
   </main>
 </template>
 
-
 <style>
-/* Transition */
 .slide-enter-active, .slide-leave-active {
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-
 main {
-  color: #8bb8ac
+  color: #8bb8ac;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  width: 100%;
+  padding: 2rem 0;
+  box-sizing: border-box;
 }
 
 .slide-enter-from {

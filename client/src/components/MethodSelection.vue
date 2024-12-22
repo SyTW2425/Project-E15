@@ -70,7 +70,7 @@ export default defineComponent({
 <style scoped>
 .method-selection {
   text-align: center;
-  padding: 20px;
+  padding: 5rem;
 }
 
 .methods {
@@ -78,7 +78,7 @@ export default defineComponent({
   width: 100%;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 60px;
   gap: 20px;
 }
 

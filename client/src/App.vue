@@ -1,20 +1,17 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import NavbarMenu from './components/NavbarMenu.vue';
 
 </script>
 
 <template>
   <header>
-    <!-- <nav>
-      <RouterLink class="link-success link-underline-opacity-0" to="/">Home</RouterLink>
-      <RouterLink class="link-success link-underline-opacity-0" to="/about">About</RouterLink>
-      <RouterLink class="link-success link-underline-opacity-0" to="/register">Register</RouterLink>
-      <RouterLink class="link-success link-underline-opacity-0" to="/users">Users</RouterLink>
-    </nav> -->
+    <nav>
+      <NavbarMenu/>
+    </nav>
   </header>
-  <main>
-    <div id="Mostrar titulo"></div>
-  <RouterView />
+  <main class="page-container">
+    <RouterView />
   </main>
 </template>
 
@@ -24,6 +21,17 @@ header {
   line-height: 1.5;
   max-height: 100vh;
 }
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  width: 100%;
+  padding: 2rem 0;
+  box-sizing: border-box;
+}
+
 
 .logo {
   display: block;

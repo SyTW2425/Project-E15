@@ -4,6 +4,7 @@ import axios from "axios";
 import type { HistoryInterfaces } from "@/models/historyModel";
 import { History } from "@/models/historyModel";
 import { Types } from "mongoose";
+// import VUE_API_URL from "@/axios.default.baseUrl";
 
 export const useHistoryStore = defineStore ('History', () => {
     const history = ref<HistoryInterfaces[]>([]);
@@ -23,7 +24,6 @@ export const useHistoryStore = defineStore ('History', () => {
                 history.totalStudyTime, 
                 history.date
             ));
-            console.log('Store: ', history.value);
             error.value = null;
             return history.value;
         } catch (err: unknown) {
@@ -35,5 +35,37 @@ export const useHistoryStore = defineStore ('History', () => {
         }
     }
 
-    return { history, errorMessage, getHistory}
+    async function postHistory(userID: string, methodName: string, subjectName: string, totalStudyTime: number ) {
+        const userObjectId = new Types.ObjectId(userID)
+        console.log('userID',userObjectId )
+        console.log('methodName',methodName )
+        console.log('subjectName',subjectName )
+        console.log('totalStudyTime',totalStudyTime )
+        try {
+            console.log('history store post')
+            // const apiURL = VUE_API_URL;
+            const apiUrl = import.meta.env.VUE_APP_API_URL || 'http://localhost:5300';
+            const response = await axios.post(`${apiUrl}/history`, {
+                userObjectId,
+                methodName,
+                subjectName,
+                totalStudyTime,
+            });
+            error.value = null;
+            console.log('post History:',response.data);
+        } catch (err:unknown) {
+            if (err instanceof Error) {
+                console.error('Error:', err.message);
+                error.value = 'Error getting the list of methods';
+            }
+            return []; 
+        }
+    }
+
+    return { 
+        history, 
+        errorMessage, 
+        getHistory, 
+        postHistory
+    }
 })
