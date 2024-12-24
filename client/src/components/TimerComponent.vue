@@ -82,8 +82,10 @@ export default defineComponent({
             // console.log('subjectName',sessionStorage.getItem('subjectName') || '')
             // console.log('totalStudyTime',totalStudyTime.value)
             //debug session
-            historyStore.postHistory(sessionStorage.getItem('userId') || '', sessionStorage.getItem('methodName')|| '', sessionStorage.getItem('subjectName') || '', timerStore.totalStudyTime)
+            const historyResponse = historyStore.postHistory(sessionStorage.getItem('userId') || '', sessionStorage.getItem('methodName')|| '', sessionStorage.getItem('subjectName') || '', timerStore.totalStudyTime)
             router.push('/history')
+
+            console.log("History Response: ", historyResponse)
         }
 
         return {
