@@ -6,6 +6,7 @@ onMounted(() =>
 { 
   show.value = true; 
 });
+
 </script>
 
 <template>

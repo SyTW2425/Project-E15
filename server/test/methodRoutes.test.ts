@@ -3,6 +3,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import request from 'supertest';
 import express from 'express';
 import StudyMethodModel from '../models/studyMethodModel';
+import Subject from '../models/subject_model';
 import UserPreferencesModel from '../models/userPreferencesModel';
 import User from '../models/user_model';
 
@@ -138,10 +139,11 @@ describe('Rutas de Métodos de Estudio y Preferencias', () => {
                 password: '123456',
                 role: 'student'
             });
-
+            const subject = await Subject.create({  name: 'Matemáticas', description: 'Álgebra, Geometría, Cálculo' });
             const preferedMethod = await UserPreferencesModel.create({
                 userId: usuario._id,
                 methodId: metodo._id,
+                subjectId: subject._id,
                     workDuration: 25,
                     breakDuration: 5
                 

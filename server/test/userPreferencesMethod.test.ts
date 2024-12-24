@@ -58,6 +58,7 @@ describe('UserPreferences Model Test', () => {
         test('debe fallar al crear preferencias sin methodId', async () => {
             const userPreferencesWithoutMethodId = {
                 userId: new mongoose.Types.ObjectId(),
+                
                     workDuration: 25,
                     breakDuration: 5
                 
