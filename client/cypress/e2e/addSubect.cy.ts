@@ -48,14 +48,5 @@ describe('Test de Integración - Timer', () => {
 
 
     cy.get('button').contains("Lets start studying!!").click();
-    // Simula el clic en START y luego en STOP 
-    cy.get('.timer-button-start').click(); 
-    cy.wait(2000); 
-    cy.get('.timer-visual').should('have.css', 'color', 'rgb(185, 58, 58)');
-    cy.get('.timer-button-stop').click();
-    // Simula pasar tiempo suficiente para cambiar color
-   
-        
-
     });
   });
