@@ -3,7 +3,7 @@ import {app,servers} from './../server'
 import mongoose from 'mongoose'
 import User from './../models/user_model'
 
-let server:any;
+
 
 
 describe('Probando la api rest de users',() =>{
