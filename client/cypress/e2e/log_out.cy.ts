@@ -1,10 +1,13 @@
 
 
 describe('Test de Integración - Log out', () => {
-    beforeEach(() => {
-      cy.intercept('GET', '**/*.js', { statusCode: 200, body: '' });
-      cy.visit('/login');
-    });
+  beforeEach(() => {
+    cy.intercept('GET', '**/*.js', { statusCode: 200, body: '' });
+    cy.visit('/login');
+
+
+  });
+
   
   
     it('Debe cerrar sesión correctamente', () => {
@@ -13,10 +16,14 @@ describe('Test de Integración - Log out', () => {
       cy.get('button[type="submit"]').click(); // Haz clic en el botón de login
   
   
-      // Verifica que el usuario sea redirigido
-      cy.url().should('include', '/'); // Verifica la URL
-      cy.get('.logout').click(); // Haz clic en el botón de logout
-      cy.contains('Iniciar Sesión').should('be.visible'); // Verifica un mensaje en el dashboard
-      cy.contains('Registrarse').should('be.visible'); // Verifica un mensaje en el dashboard
+      cy.get('button.log_out').eq(1).click();
+      cy.get('button.register').should('be.visible');
+      cy.get('button.log_in').should('be.visible')
+  
+      // Comprobar que el mensaje de bienvenida haya desaparecido
+      cy.contains('Bienvenido,').should('not.exist');
+  
     });
+    
+
   });

@@ -28,7 +28,7 @@ describe('Test de Integración - Method selection', () => {
       });
   
         // Verifica que el usuario sea redirigido
-        cy.url().should('include', '/timer'); // Verifica la URL
+        cy.url().should('include', '/subject'); // Verifica la URL
   
       
     });

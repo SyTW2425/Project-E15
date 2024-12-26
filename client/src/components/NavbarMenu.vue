@@ -19,13 +19,13 @@
                 <h3>Bienvenido, {{ auth.name }}</h3>
               </li>
               <li v-else>
-                <button @click="handleLogin">Iniciar Sesión</button>
+                <button class="log_in" @click="handleLogin">Iniciar Sesión</button>
               </li>
               <li v-if="auth.isAuthenticated">
-                <button class='logout' @click="handleLogout">Cerrar Sesión</button>
+                <button class='log_out' @click="handleLogout">Cerrar Sesión</button>
               </li>
               <li v-else>
-                <button @click="handleRegister">Registrarse</button>
+                <button class="register" @click="handleRegister">Registrarse</button>
               </li>
             </ul>
           </div>
