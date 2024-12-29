@@ -74,15 +74,15 @@ export default defineComponent({
             timerStore.pauseTimer()
         }
 
-        const stopTimer = () => {
+        const stopTimer =  () => {
             timerStore.stopTimer()
             //debug session
             // console.log('userID',sessionStorage.getItem('userId'))
             // console.log('methodName',sessionStorage.getItem('methodName')|| '')
             // console.log('subjectName',sessionStorage.getItem('subjectName') || '')
-            // console.log('totalStudyTime',totalStudyTime.value)
+            console.log('totalStudyTime',totalStudyTime.value)
             //debug session
-            const historyResponse = historyStore.postHistory(sessionStorage.getItem('userId') || '', sessionStorage.getItem('methodName')|| '', sessionStorage.getItem('subjectName') || '', timerStore.totalStudyTime)
+            const historyResponse =historyStore.postHistory(sessionStorage.getItem('userId') || '', sessionStorage.getItem('methodName')|| '', sessionStorage.getItem('subjectName') || '', totalStudyTime.value)
             router.push('/history')
 
             console.log("History Response: ", historyResponse)

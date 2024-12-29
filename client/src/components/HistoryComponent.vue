@@ -48,10 +48,11 @@ export default defineComponent ({
             console.log('Components: ', history.value);
         });
 
-        const formatStudyTime = (totalMinutes: number) => {
-            const hours = Math.floor(totalMinutes / 60);
-            const minutes = totalMinutes % 60;
-            return `${hours}h ${minutes}m`;
+        const formatStudyTime = (totalSeconds: number) => {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${hours}h ${minutes}m ${seconds}s`;
         };
 
         return {
