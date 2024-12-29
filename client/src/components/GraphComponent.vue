@@ -64,10 +64,16 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
                         console.warn('No se encontraron sesiones de estudio.');
                     } else {
                         chartData.value.labels = history.value.map((session) => new Date(session.date).toLocaleDateString());
-                        chartData.value.datasets[0].data = history.value.map((session) => session.totalStudyTime);
+                        chartData.value.datasets[0].data = history.value.map((session) => Number(session.totalStudyTime)  );
+                        console.log('totalTimeGraph:', chartData.value);
 
-                        console.log('dategraph: ',history.value.map((session) => new Date(session.date).toLocaleDateString()))
-                        console.log('totalTimeGraph: ', history.value.map((session) => session.totalStudyTime))
+
+
+
+
+
+                        //console.log('dategraph: ',history.value.map((session) => new Date(session.date).toLocaleDateString()))
+                        //console.log('totalTimeGraph: ', history.value.map((session) => session.totalStudyTime))
                     }
                 } catch (error) {
                     console.error('Error al obtener el historial:', error);

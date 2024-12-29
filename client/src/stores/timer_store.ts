@@ -58,7 +58,7 @@ export const useTimerStore = defineStore('Timer', () => {
         isRunning.value = false;
         currentTime.value = 0;
         isBreak.value = false;
-        totalStudyTime.value = 0;
+        //totalStudyTime.value = 0;
     }
 
     function pauseTimer() {

@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type {HistorySubjectInterface } from '@/models/history_study_model'
 import { HistorySubject } from '@/models/history_study_model'
+import axios from 'axios';
 import { Types } from 'mongoose';
 import dotenv from 'dotenv';
 
@@ -11,11 +12,19 @@ export const useHistorySubjectStorre = defineStore('HistorySubject',()=>{
 
     async function getHistorySubject () {
         let port:number | string= process.env.PORT || 5300; 
-        const response = await fetch('http://localhost:'+ port)
+        const response = await fetch('http://localhost/history:'+ port)
         const data = await response.json();
-        historysubject .value= data.map((historysubject_now:any)=> new HistorySubject(historysubject_now.IDsubject,historysubject_now.IDuser,historysubject_now.date,historysubject_now.time,historysubject_now._id))
+        historysubject.value= data.map((historysubject_now:any)=> new HistorySubject(historysubject_now.IDsubject,historysubject_now.IDuser,historysubject_now.date,historysubject_now.time,historysubject_now._id))
     }
     async function addHistorySubject (historysubjectadd:HistorySubjectInterface) {
+        try{
+            const apiUrl = import.meta.env.VUE_APP_API_URL || 'http://localhost:5300';
+            const response = await axios.post(`${apiUrl}/history`, historysubjectadd);
+            historysubject .value.push(response.data) 
+        }catch(err:unknown)
+        {
+            
+        }
         historysubject .value.push(historysubjectadd)
     }
     async function deleteHistorySubject(id: Types.ObjectId) 
