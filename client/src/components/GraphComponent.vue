@@ -41,7 +41,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
             labels: [] as string[],
                 datasets: [
                     {
-                    label: 'Tiempo Total de Estudio (min)',
+                    label: 'Tiempo Total de Estudio (sec)',
                     backgroundColor: '#344e41',
                     data: [] as number[],
                     },
