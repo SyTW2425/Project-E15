@@ -19,12 +19,6 @@ import SelectionSubject from '@/components/SelectionSubject.vue';
 
 
 
-
-
-
-
-
-
 <style scoped>
 .main-container {
   display: flex;
@@ -43,7 +37,7 @@ import SelectionSubject from '@/components/SelectionSubject.vue';
   flex: 1; /* Permite que el contenedor ocupe espacio proporcional */
   display: flex; /* Permite flexbox para hijos */
   flex-direction: row; /* Coloca los hijos horizontalmente */
-  gap: 2.5rem; /* Espaciado entre los hijos */
+  gap: 7rem; /* Espaciado entre los hijos */
 }
 
 </style>
