@@ -42,6 +42,7 @@ export default defineComponent({
                 throw new Error('User ID or method ID not found');
             }
             await preferencesStore.addUserPreferences(userID, methodId, subjectId)
+            
             router.push('/timer')
 
         }
