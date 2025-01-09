@@ -6,7 +6,7 @@
         </div>
         <div class="study-time">
             <p>Total Study Time: {{ studyTimeDisplay }}</p>
-            <p>Total Study Time: {{ totalStudyTime }}</p>
+
         </div>
         <div class="button-collections">
             <button class="timer-button-start" @click="startTimer(workDuration, breakDuration)">START</button>
